@@ -11,7 +11,7 @@ struct SharedM
     int integer;
     char arr[1024];
     bool dataRead;
-};
+    };
 
 void readData(int Shm_id)
 {
@@ -21,24 +21,25 @@ void readData(int Shm_id)
         perror("shmat");
         exit(EXIT_FAILURE);
     }
-
+           
     if (shm_at->dataRead)
     {
-        int number = shm_at->integer;
+                int number = shm_at->integer;
         char message[1024];
         strncpy(message, shm_at->arr, sizeof(message));
         shm_at->dataRead = false ;
         cout << "Read data Integer: " << number << ", Message: " << message << endl;
         cout << "Data is read!!" << endl;
-    }
+            }
     else
     {
-        cout << "No Data to read,waiting...";
+        cout << "No Data to read,waiting..."<<endl;
+        shmdt(shm_at);
         exit(EXIT_FAILURE);
+    } 
     }
-}
-
-int main()
+    
+    int main()
 {
     key_t key = ftok("Sharedmemory.txt", 1);
     if (key == -1)
