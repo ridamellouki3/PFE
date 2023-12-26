@@ -12,6 +12,7 @@ struct SharedM
   int integer;
   char arr[1024];
   bool dataRead;
+  
 };
 
 void writeData(int Shm_id, char *str, int i)
